@@ -11,10 +11,10 @@ const connectedUser= new Set();
 
 io.on('connection',(socket)=>{
     
-    socket.join("room1");
+    socket.join("some");
     console.log("Connected: ",socket.id, socket.rooms);
     connectedUser.add(socket.id);
-    io.to("room1").emit('connected-user', connectedUser.size);
+    io.to("some").emit('connected-user', connectedUser.size);
     socket.on('disconect',()=>{
         console.log("Disconnected: ", socket.id);
         connectedUser.delete(socket.id);
@@ -24,6 +24,6 @@ io.on('connection',(socket)=>{
         console.log(data);
         console.log('estas enviando este mensaje a:',socket.rooms, data);
         //socket.broadcast.emit('message-receive', data);
-        socket.to("room1").emit('message-receive', data);
+        socket.to("some").emit('message-receive', data);
     });
 });
